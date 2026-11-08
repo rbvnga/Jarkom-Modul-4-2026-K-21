@@ -24,29 +24,32 @@ ip addr add 10.74.16.65/30 dev eth4
 ip link set eth4 up
 
 # 7. Routing statis
-# Via Psyche (.34)
-ip route add 10.74.0.0/22 via 10.74.16.34
-# Via Copland (.35)
-ip route add 10.74.8.0/23 via 10.74.16.35
-ip route add 10.74.15.192/26 via 10.74.16.35
-# Via Schumann (.36)
-ip route add 10.74.4.0/22 via 10.74.16.36
-ip route add 10.74.16.40/29 via 10.74.16.36
-ip route add 10.74.16.56/30 via 10.74.16.36
-# Via Wired (.66)
-ip route add 10.74.10.0/23 via 10.74.16.66
-ip route add 10.74.14.128/25 via 10.74.16.66
-ip route add 10.74.15.0/26 via 10.74.16.66
-ip route add 10.74.15.128/26 via 10.74.16.66
-ip route add 10.74.16.0/27 via 10.74.16.66
-ip route add 10.74.16.48/29 via 10.74.16.66
-ip route add 10.74.16.64/27 via 10.74.16.66
-ip route add 10.74.12.0/23 via 10.74.16.66
-ip route add 10.74.15.64/26 via 10.74.16.66
-ip route add 10.74.16.60/30 via 10.74.16.66
+
+# --- ke Psyche (.34) ---
+ip route add 10.74.0.0/22 via 10.74.16.34      # A3  Karl, Lin
+# --- ke Copland (.35) ---
+ip route add 10.74.8.0/23 via 10.74.16.35      # A5  Masayuki
+ip route add 10.74.15.192/26 via 10.74.16.35   # A4  Juri
+# --- ke Schumann (.36) ---
+ip route add 10.74.4.0/22 via 10.74.16.36      # A8  Omnipresence, Denpa
+ip route add 10.74.16.40/29 via 10.74.16.36    # A6  Akashic
+ip route add 10.74.16.56/30 via 10.74.16.36    # A7  link Schumann-Acceta
+# --- ke Wired (.66) ---
+ip route add 10.74.12.0/23 via 10.74.16.66     # SUMMARY: A10 + A12 (Alice, Reika, Kuma, Miho, Yasuo)
+ip route add 10.74.15.64/26 via 10.74.16.66    # A11 Taro
+ip route add 10.74.16.60/30 via 10.74.16.66    # A9  link Wired-Navi
+ip route add 10.74.10.0/23 via 10.74.16.66     # A15 Collective, Ghost
+ip route add 10.74.14.128/25 via 10.74.16.66   # A17 Lilith, Specter
+ip route add 10.74.15.0/26 via 10.74.16.66     # A25 Lain, Mika
+ip route add 10.74.15.128/26 via 10.74.16.66   # A19 Chisa, Hodgeson
+ip route add 10.74.16.0/27 via 10.74.16.66     # A23 Semi
+ip route add 10.74.16.48/29 via 10.74.16.66    # A21 Eri
+ip route add 10.74.16.64/27 via 10.74.16.66    # SUMMARY: A14, A16, A18, A20, A22, A24 
+
 # 8. NAT & DNS
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
+
 
 # 9. Validasi
 ip a
