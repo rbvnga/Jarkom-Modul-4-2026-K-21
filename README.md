@@ -8,8 +8,6 @@
 # Hasil Subnetting VLSM dan CIDR 
 https://docs.google.com/spreadsheets/d/12yhZsVqgc-6eMviqDfuFbwyfBeCnNJgP/edit?usp=sharing&ouid=102900172779478181126&rtpof=true&sd=true 
 
-# Laporan Praktikum Modul 4: Subnetting VLSM dan Static Routing (GNS3)
-
 ## 1. VLSM
 
 ### 1.1 Topologi VLSM di gns
@@ -19,26 +17,7 @@ https://docs.google.com/spreadsheets/d/12yhZsVqgc-6eMviqDfuFbwyfBeCnNJgP/edit?us
 
 Satu subnet (Ax) adalah satu **broadcast domain**: interface router, semua switch di belakangnya, dan semua host yang tersambung, sampai bertemu interface router lain. Switch bekerja di Layer 2 sehingga tidak memisahkan subnet dan tidak memerlukan IP. Link NAT berada di luar perhitungan subnet.
 
----
-
 ### 1.3  Perhitungan Jumlah IP dan Prefix
-
-### Rumus
-
-- **Jumlah IP = total host + jumlah interface router pada subnet itu**
-- **Usable = 2ⁿ − 2** (n = bit host). Dua alamat dipakai Network ID dan Broadcast.
-- Prefix dipilih dari n terkecil yang usable-nya ≥ Jumlah IP.
-
-| Prefix | Bit host | Total alamat | Usable |
-|---|---|---|---|
-| /22 | 10 | 1024 | 1022 |
-| /23 | 9 | 512 | 510 |
-| /24 | 8 | 256 | 254 |
-| /25 | 7 | 128 | 126 |
-| /26 | 6 | 64 | 62 |
-| /27 | 5 | 32 | 30 |
-| /29 | 3 | 8 | 6 |
-| /30 | 2 | 4 | 2 |
 
 ###  Tabel Kebutuhan Subnet
 
@@ -241,15 +220,8 @@ Pembagian IP sudah efisien karena:
 
 Sisa blok /19 (10.74.16.92 sampai 10.74.31.255) merupakan ruang cadangan, bukan pemborosan.
 
-### 1.11 Routing
-
-- Default route di semua router selain Cyberia, sehingga router daun cukup 1 entri.
-- Summarization menggabungkan subnet berurutan (10.74.12.0/23, 10.74.16.64/27, 10.74.16.80/28).
-- Total **60 entri** dibandingkan 288 tanpa efisiensi (turun sekitar 79%).
-- Trade-off: Psyche, Copland, dan Schumann berada dalam satu segmen A2 tetapi hanya memakai default ke Cyberia, sehingga lalu lintas antar mereka melewati Cyberia (satu hop tambahan). Ini diterima untuk menjaga jumlah route tetap kecil.
-
 ---
-## 1.12 Konfigurasi
+## 1.11 Konfigurasi
  
 ###  Router
  
@@ -542,7 +514,7 @@ ip link set eth1 up
 ip route add default via 10.74.16.89
 ```
  
-### 1.13 Host
+### 1.12 Host
  
 #### JJ
 ```

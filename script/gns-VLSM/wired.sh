@@ -17,17 +17,19 @@ ip addr add 10.74.16.61/30 dev eth2
 ip link set eth2 up
 
 # Default ke Cyberia
-ip route add default via 10.74.16.65
+ip route add default via 10.74.16.65           # sisanya ke Cyberia
+# --- ke Navi (.62) ---
+ip route add 10.74.12.0/23 via 10.74.16.62     # ★ SUMMARY: A10 + A12
+ip route add 10.74.15.64/26 via 10.74.16.62    # A11 Taro
+# --- ke Tachibana (.70) ---
+ip route add 10.74.10.0/23 via 10.74.16.70     # A15
+ip route add 10.74.14.128/25 via 10.74.16.70   # A17
+ip route add 10.74.15.0/26 via 10.74.16.70     # A25
+ip route add 10.74.15.128/26 via 10.74.16.70   # A19
+ip route add 10.74.16.0/27 via 10.74.16.70     # A23
+ip route add 10.74.16.48/29 via 10.74.16.70    # A21
+ip route add 10.74.16.64/27 via 10.74.16.70    # ★ SUMMARY: A16, A18, A20, A22, A24 (A13, A14 terhubung langsung)
 
-# Di belakang Navi (.62)
-ip route add 10.74.12.0/23 via 10.74.16.62
-ip route add 10.74.15.64/26 via 10.74.16.62
-
-# Di belakang Tachibana (.70)
-ip route add 10.74.10.0/23 via 10.74.16.70
-ip route add 10.74.14.128/25 via 10.74.16.70
-ip route add 10.74.15.0/26 via 10.74.16.70
-ip route add 10.74.15.128/26 via 10.74.16.70
-ip route add 10.74.16.0/27 via 10.74.16.70
-ip route add 10.74.16.48/29 via 10.74.16.70
-ip route add 10.74.16.64/27 via 10.74.16.70
+ip a
+ip route
+ 
