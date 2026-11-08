@@ -15,15 +15,15 @@ https://docs.google.com/spreadsheets/d/12yhZsVqgc-6eMviqDfuFbwyfBeCnNJgP/edit?us
 ### 1.1 Topologi VLSM di gns
 <img src="assets/VLSM/TOPOLOGI VLSM MODUL 4.png">
 
-### 3.3 Konsep Subnet
+### 1.2 Konsep Subnet
 
 Satu subnet (Ax) adalah satu **broadcast domain**: interface router, semua switch di belakangnya, dan semua host yang tersambung, sampai bertemu interface router lain. Switch bekerja di Layer 2 sehingga tidak memisahkan subnet dan tidak memerlukan IP. Link NAT berada di luar perhitungan subnet.
 
 ---
 
-## 4. Perhitungan Jumlah IP dan Prefix
+### 1.3  Perhitungan Jumlah IP dan Prefix
 
-### 4.1 Rumus
+### Rumus
 
 - **Jumlah IP = total host + jumlah interface router pada subnet itu**
 - **Usable = 2ⁿ − 2** (n = bit host). Dua alamat dipakai Network ID dan Broadcast.
@@ -40,7 +40,7 @@ Satu subnet (Ax) adalah satu **broadcast domain**: interface router, semua switc
 | /29 | 3 | 8 | 6 |
 | /30 | 2 | 4 | 2 |
 
-### 4.2 Tabel Kebutuhan Subnet
+###  Tabel Kebutuhan Subnet
 
 | Subnet | Rute | Perhitungan | Jumlah IP | Prefix |
 |---|---|---|---|---|
@@ -74,9 +74,9 @@ Satu subnet (Ax) adalah satu **broadcast domain**: interface router, semua switc
  Blok induk minimal **/19** (8192 alamat). Total usable = 4188 − (25 × 2) = **4138**. Alokasi berakhir di 10.74.16.91, sisa blok 10.74.16.92 sampai 10.74.31.255 menjadi cadangan.
 ---
 
-## 5. Pengurutan VLSM
+## 1.4 Pengurutan VLSM
 
-### 5.1 Hasil Alokasi
+### Hasil Alokasi
 
 | Subnet | Prefix | Ukuran Blok | Network ID | Netmask | Broadcast | Range IP |
 |---|---|---|---|---|---|---|
@@ -109,13 +109,13 @@ Satu subnet (Ax) adalah satu **broadcast domain**: interface router, semua switc
 
 ---
 
-## 6. VLSM Tree
+## 1.5 VLSM Tree
 
 <img src="assets/VLSM/VLSM Tree.png">
 
 ---
 
-## 7. Pengalamatan Interface Router
+## 1.6 Pengalamatan Interface Router
 
 | Router | Interface | Subnet | IP |
 |---|---|---|---|
@@ -160,7 +160,7 @@ Satu subnet (Ax) adalah satu **broadcast domain**: interface router, semua switc
 
 ---
 
-## 8. Pengalamatan Host
+## 1.7 Pengalamatan Host
 
 Setiap host dikonfigurasi dengan satu IP, netmask, dan default gateway (IP router pada segmen itu). Angka "xx host" pada gambar adalah jumlah host yang diperhitungkan untuk subnetting, bukan jumlah node di GNS3.
 
@@ -194,10 +194,10 @@ Setiap host dikonfigurasi dengan satu IP, netmask, dan default gateway (IP route
 
 ---
 
-## 9. Static Routing
+## 1.8 Static Routing
 <link href="https://github.com/rbvnga/Jarkom-Modul-4-2026-K-21/tree/main/script/gns-VLSM">
 
-### 9.1 Strategi
+### 1.9 Strategi
 
 Topologi berbentuk pohon dengan Cyberia sebagai akar, sehingga strategi paling efisien:
 
@@ -208,7 +208,7 @@ Topologi berbentuk pohon dengan Cyberia sebagai akar, sehingga strategi paling e
 
 Summarization adalah menggabungkan beberapa route yang **next hop-nya sama** dan **alamatnya berurutan** menjadi **satu route** dengan prefix lebih pendek. Jalur paketnya tetap sama, tetapi tidak perlu menulis route satu per satu.
 
-#### 9.3.7 Daftar Baris Summary pada Konfigurasi
+#### Daftar Baris Summary pada Konfigurasi
  
 | Router | Route summary | Menggantikan | Hemat |
 |---|---|---|---|
@@ -222,9 +222,9 @@ Summarization adalah menggabungkan beberapa route yang **next hop-nya sama** dan
 
 ---
 
-## 13. Analisis Efisiensi
+##  1.10 Analisis Efisiensi
 
-### 13.1 Pembagian IP
+###  Pembagian IP
 
 Pembagian IP sudah efisien karena:
 1. Setiap subnet memakai **prefix terkecil** yang usable-nya muat kebutuhan.
@@ -249,9 +249,9 @@ Sisa blok /19 (10.74.16.92 sampai 10.74.31.255) merupakan ruang cadangan, bukan 
 - Trade-off: Psyche, Copland, dan Schumann berada dalam satu segmen A2 tetapi hanya memakai default ke Cyberia, sehingga lalu lintas antar mereka melewati Cyberia (satu hop tambahan). Ini diterima untuk menjaga jumlah route tetap kecil.
 
 ---
-## 10. Konfigurasi
+## 1.11 Konfigurasi
  
-### 10.1 Router
+###  Router
  
 #### Cyberia
 ```sh
