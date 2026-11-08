@@ -203,18 +203,22 @@ Topologi berbentuk pohon dengan Cyberia sebagai akar, sehingga strategi paling e
 
 - **Default route** ke arah Cyberia pada setiap router selain Cyberia. Satu entri menggantikan semua jaringan di luar subtree-nya.
 - **Route spesifik** hanya untuk subnet di belakang router anak.
-- **Summarization** untuk menggabungkan beberapa subnet yang berurutan (misal 10.74.12.0/23 untuk A10 dan A12, 10.74.16.64/27 dan 10.74.16.80/28 untuk link-link).
+- **Summarization** untuk menggabungkan beberapa subnet yang berurutan.
 - **Cyberia** memakai default ke NAT dan route spesifik ke tiap cabang.
 
-### 9.3 Efisiensi Routing
+Summarization adalah menggabungkan beberapa route yang **next hop-nya sama** dan **alamatnya berurutan** menjadi **satu route** dengan prefix lebih pendek. Jalur paketnya tetap sama, tetapi tidak perlu menulis route satu per satu.
 
-| Kondisi | Jumlah entri route |
-|---|---|
-| Tanpa default dan summarization (setiap router tahu semua subnet yang tidak terhubung langsung) | 13 × 25 − 37 = **288** |
-| Dengan default dan summarization (konfigurasi ini, termasuk 13 default route) | **60** |
-| Pengurangan | sekitar **79%** |
-
-Route yang tumpang tindih dengan jaringan yang terhubung langsung (misal 10.74.16.64/27 pada Cyberia dan Wired yang mencakup link A13) tetap aman karena router memilih **longest prefix match**.
+#### 9.3.7 Daftar Baris Summary pada Konfigurasi
+ 
+| Router | Route summary | Menggantikan | Hemat |
+|---|---|---|---|
+| Cyberia | `10.74.12.0/23` via 10.74.16.66 | A10, A12 | 1 |
+| Cyberia | `10.74.16.64/27` via 10.74.16.66 | A14, A16, A18, A20, A22, A24 | 5 |
+| Wired | `10.74.12.0/23` via 10.74.16.62 | A10, A12 | 1 |
+| Wired | `10.74.16.64/27` via 10.74.16.70 | A16, A18, A20, A22, A24 | 4 |
+| Tachibana | `10.74.16.80/28` via 10.74.16.74 | A20, A22, A24 | 2 |
+| Deus | `10.74.16.80/28` via 10.74.16.78 | A20, A22, A24 | 2 |
+| **Total** | | | **15** |
 
 ---
 
